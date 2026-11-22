@@ -99,7 +99,7 @@ export function Footer() {
 
         <div className="mt-5 border-t border-border/60 pt-3">
           <div className="flex flex-col items-center gap-1.5 text-center text-[12px] text-muted-foreground sm:flex-row sm:justify-between sm:text-left">
-            <p>© 2026 Huzali. All rights reserved.</p>
+            <p>© 2026 Huzali Academy. All rights reserved.</p>
 
             <p>
               Built by{" "}

@@ -9,8 +9,11 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-pressed",
+        // Secondary action: primary-coloured border and text on the page
+        // background. Hover/expanded deepen to primary-hover on the
+        // purple-tinted secondary surface (5.66:1; plain primary would be 4.21:1).
         outline:
-          "border-border bg-input/30 hover:bg-input/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+          "border-primary bg-background text-primary hover:border-primary-hover hover:bg-secondary hover:text-primary-hover aria-expanded:border-primary-hover aria-expanded:bg-secondary aria-expanded:text-primary-hover",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
