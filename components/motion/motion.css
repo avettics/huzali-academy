@@ -1,0 +1,110 @@
+/*
+ * Huzali motion: one quiet reveal language (fade + small rise, or fade +
+ * almost-imperceptible scale for photography). Values are the --motion-*
+ * tokens in app/globals.css. Selectors target only the `data-motion`
+ * attribute set by components/motion, so they cannot affect anything else.
+ *
+ * 1. Entrance: pure CSS. Elements animate in when first painted (or inserted
+ *    on client navigation), so above-the-fold content never waits for
+ *    JavaScript.
+ * 2. Scroll reveal: after hydration, elements still outside the viewport are
+ *    set to `data-reveal-state="pending"` (hidden) and transition in once
+ *    when they enter it (`"visible"`).
+ *
+ * All of this only applies when scripting is enabled and reduced motion is
+ * not requested; otherwise content is simply visible. Only opacity and
+ * transform are animated.
+ */
+
+[data-motion] {
+  --motion-delay: calc(
+    (var(--motion-delay-steps, 0) + var(--motion-stagger-index, 0)) *
+      var(--motion-step)
+  );
+}
+
+/* Stagger order for direct children, capped so long groups resolve quickly. */
+[data-motion="stagger"] > :nth-child(2) { --motion-stagger-index: 1; }
+[data-motion="stagger"] > :nth-child(3) { --motion-stagger-index: 2; }
+[data-motion="stagger"] > :nth-child(4) { --motion-stagger-index: 3; }
+[data-motion="stagger"] > :nth-child(5) { --motion-stagger-index: 4; }
+[data-motion="stagger"] > :nth-child(6) { --motion-stagger-index: 5; }
+[data-motion="stagger"] > :nth-child(n + 7) { --motion-stagger-index: 6; }
+
+/* Keeps the settling scale inside the frame, so it can never overflow. */
+[data-motion="image"] {
+  overflow: clip;
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  /* 1. Entrance on first paint. */
+  [data-motion="reveal"]:not([data-reveal-state]),
+  [data-motion="stagger"]:not([data-reveal-state])
+    > [data-motion="stagger-item"] {
+    animation: huzali-rise var(--motion-duration-reveal) var(--motion-ease)
+      var(--motion-delay) both;
+  }
+
+  [data-motion="image"]:not([data-reveal-state]) {
+    animation: huzali-fade var(--motion-duration-image) var(--motion-ease)
+      var(--motion-delay) both;
+  }
+
+  [data-motion="image"]:not([data-reveal-state]) > * {
+    animation: huzali-settle var(--motion-duration-image) var(--motion-ease)
+      var(--motion-delay) both;
+  }
+
+  /* 2. Scroll reveal. */
+  [data-motion="reveal"][data-reveal-state],
+  [data-motion="stagger"][data-reveal-state] > [data-motion="stagger-item"] {
+    transition-property: opacity, transform;
+    transition-duration: var(--motion-duration-reveal);
+    transition-timing-function: var(--motion-ease);
+    transition-delay: var(--motion-delay);
+  }
+
+  [data-motion="image"][data-reveal-state] {
+    transition: opacity var(--motion-duration-image) var(--motion-ease)
+      var(--motion-delay);
+  }
+
+  [data-motion="image"][data-reveal-state] > * {
+    transition: transform var(--motion-duration-image) var(--motion-ease)
+      var(--motion-delay);
+  }
+
+  [data-motion="reveal"][data-reveal-state="pending"],
+  [data-motion="stagger"][data-reveal-state="pending"]
+    > [data-motion="stagger-item"] {
+    opacity: 0;
+    transform: translate3d(0, var(--motion-reveal-distance), 0);
+  }
+
+  [data-motion="image"][data-reveal-state="pending"] {
+    opacity: 0;
+  }
+
+  [data-motion="image"][data-reveal-state="pending"] > * {
+    transform: scale(var(--motion-image-scale));
+  }
+}
+
+@keyframes huzali-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--motion-reveal-distance), 0);
+  }
+}
+
+@keyframes huzali-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes huzali-settle {
+  from {
+    transform: scale(var(--motion-image-scale));
+  }
+}

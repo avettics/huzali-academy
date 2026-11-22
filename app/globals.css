@@ -168,6 +168,21 @@
 }
 
 /*
+ * MOTION PRIMITIVES — Huzali's single motion language, consumed by
+ * components/motion. Calm and short with a gentle ease-out: no bounce,
+ * spring or overshoot. Not theme-dependent.
+ */
+:root {
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration-reveal: 500ms;
+  --motion-duration-image: 600ms;
+  --motion-reveal-distance: 14px;
+  --motion-image-scale: 1.01;
+  /* Sequencing and stagger interval. */
+  --motion-step: 80ms;
+}
+
+/*
  * SEMANTIC TOKENS — dark theme. Defined for completeness; no theme switcher
  * exists and nothing applies `.dark` yet (dark mode is not an Academy V1
  * feature). Applying `.dark` to a subtree re-maps its semantic tokens, which
