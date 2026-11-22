@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Manrope, Playfair_Display } from "next/font/google";
+import { Manrope, Playfair_Display } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
@@ -15,18 +15,15 @@ const playfairDisplay = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-});
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://huzali.academy"),
+  applicationName: "Huzali Academy",
   title: {
-    default: "Huzali",
-    template: "%s | Huzali",
+    default: "Huzali Academy",
+    template: "%s | Huzali Academy",
   },
   description:
-    "Huzali is an East African beauty, skills and economic opportunity platform.",
+    "Huzali Academy is a vocational beauty academy offering professional beauty courses through scheduled intakes. Learn. Create. Earn.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -37,8 +34,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         "h-full antialiased",
         manrope.variable,
         playfairDisplay.variable,
-        geistMono.variable,
-        "font-sans",
       )}
     >
       <body className="flex min-h-full flex-col">{children}</body>

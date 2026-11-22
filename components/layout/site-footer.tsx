@@ -2,31 +2,24 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
+import {
+  footerNavigation,
+  socialNavigation,
+} from "@/components/layout/navigation";
 
-const footerNavigation = [
-  {
-    title: "Explore",
-    items: [
-      { title: "Academy", href: "/academy" },
-      { title: "Campaigns", href: "/campaigns" },
-      { title: "Partners", href: "/partners" },
-    ],
-  },
-  {
-    title: "Get involved",
-    items: [
-      { title: "Join Huzali Academy", href: "/academy/join" },
-      { title: "Book a Service", href: "/book" },
-      { title: "Contact", href: "/contact" },
-    ],
-  },
-] as const;
+/*
+ * Footer links are quiet editorial text links: muted text that turns to the
+ * foreground colour on hover or keyboard focus, never a background surface
+ * (the accent surface + shared control radius belong to header/controls).
+ * Keyboard focus also gets the global charcoal focus ring.
+ */
+const footerLinkClassName =
+  "text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:text-foreground";
 
-const socialNavigation = [
-  { title: "Instagram", href: "#" },
-  { title: "TikTok", href: "#" },
-  { title: "Facebook", href: "#" },
-] as const;
+/* Small, decorative "external" arrow that follows a label. */
+function ExternalArrow() {
+  return <ArrowUpRight className="size-3 shrink-0" aria-hidden="true" />;
+}
 
 export function Footer() {
   return (
@@ -34,10 +27,13 @@ export function Footer() {
       <Container className="py-5 sm:py-6">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-[1.8fr_repeat(3,1fr)] lg:gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
+            {/*
+             * Understated footer signature naming the Academy domain. Smaller
+             * and quieter than the header "Huzali" wordmark (25px).
+             */}
             <Link
               href="/"
-              className="inline-block font-heading text-[26px] font-medium leading-none tracking-[-0.02em] text-foreground"
-              aria-label="Huzali home"
+              className="inline-block font-heading text-lg font-medium leading-none tracking-[-0.01em] whitespace-nowrap text-charcoal"
             >
               Huzali
             </Link>
@@ -58,9 +54,9 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-[13px] font-medium text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+                      className={`text-[13px] font-medium ${footerLinkClassName}`}
                     >
-                      {item.title}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -73,18 +69,28 @@ export function Footer() {
 
             <ul className="mt-2.5 space-y-1.5">
               {socialNavigation.map((item) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.href}
-                    className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
-                  >
-                    <span>{item.title}</span>
-
-                    <ArrowUpRight
-                      className="size-3 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                      aria-hidden="true"
-                    />
-                  </Link>
+                <li key={item.label}>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-1.5 text-[13px] font-medium ${footerLinkClassName}`}
+                    >
+                      <span>{item.label}</span>
+                      <span className="sr-only">(opens in a new tab)</span>
+                      <ExternalArrow />
+                    </Link>
+                  ) : (
+                    /*
+                     * Destination awaiting owner confirmation: same
+                     * presentation, but plain text (not a link, not focusable).
+                     */
+                    <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground">
+                      <span>{item.label}</span>
+                      <ExternalArrow />
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -101,9 +107,11 @@ export function Footer() {
                 href="https://avettics.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+                className={`inline-flex items-center gap-1 font-medium ${footerLinkClassName}`}
               >
-                Avettics Limited
+                <span>Avettics Limited</span>
+                <span className="sr-only">(opens in a new tab)</span>
+                <ExternalArrow />
               </Link>
             </p>
           </div>

@@ -18,11 +18,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/(site)/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses `next/font` to self-host Manrope (`font-sans`), Playfair Display (`font-heading`), and Geist Mono (`font-mono`). The semantic Tailwind v4 theme is defined in `app/globals.css`.
+This project uses `next/font` to self-host Manrope (`font-sans`) and Playfair Display (`font-heading`). The Huzali Academy brand primitives and semantic Tailwind v4 theme are defined in `app/globals.css`.
 
 Run `npm run lint`, `npx --no-install tsc --noEmit`, and `npm run build` before shipping changes. The build needs access to Google Fonts when font files are not cached.
 
-The Home page is a foundation placeholder. Navigation destinations are planned routes, and the social links currently use `#`; replace those placeholders before public launch.
+The Home page is a foundation placeholder and the other navigation destinations are planned routes. Social profile URLs are not yet confirmed: add them as `href` in `socialNavigation` (`components/layout/navigation.tsx`); until then the footer lists the platforms without links.
 
 ## Learn More
 

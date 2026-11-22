@@ -1,19 +1,17 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 import {
-  mainNavigation,
-  navigationAction,
-} from "@/components/layout/navigation";
-import { Button } from "@/components/ui/button";
+  DesktopNavigationItems,
+  PathnameAwareDesktopNavigationItems,
+} from "@/components/layout/navigation-links";
+import { navigationAction } from "@/components/layout/navigation";
+import { buttonVariants } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-
-const navigationItemClassName =
-  "inline-flex h-9 items-center justify-center rounded-md bg-transparent px-3 py-0 text-[13px] font-medium tracking-[0.01em] text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground";
+import { cn } from "@/lib/utils";
 
 export function DesktopNavigation() {
   return (
@@ -23,28 +21,29 @@ export function DesktopNavigation() {
         aria-label="Main navigation"
       >
         <NavigationMenuList className="items-center gap-1">
-          {mainNavigation.map((item) => (
-            <NavigationMenuItem key={item.href}>
-              <NavigationMenuLink
-                render={<Link href={item.href} />}
-                className={navigationItemClassName}
-              >
-                {item.label}
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-          ))}
+          {/*
+           * Reading the pathname can suspend on routes whose params are only
+           * known at request time; the fallback keeps the header prerendered.
+           */}
+          <Suspense fallback={<DesktopNavigationItems />}>
+            <PathnameAwareDesktopNavigationItems />
+          </Suspense>
         </NavigationMenuList>
       </NavigationMenu>
 
       <div className="hidden shrink-0 items-center justify-self-end lg:flex">
-        <Button
-          nativeButton={false}
-          size="sm"
-          className="h-9 px-5 text-[13px] font-semibold shadow-sm active:not-aria-[haspopup]:translate-y-0"
-          render={<Link href={navigationAction.href} />}
+        {/* A navigation action, so a real link styled as the primary button. */}
+        <Link
+          href={navigationAction.href}
+          className={cn(
+            buttonVariants({
+              size: "sm",
+              className: "h-9 px-5 text-[13px] font-semibold shadow-sm",
+            }),
+          )}
         >
           {navigationAction.label}
-        </Button>
+        </Link>
       </div>
     </>
   );
