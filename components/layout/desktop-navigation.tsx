@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { ArrowRight } from "lucide-react";
 
 import {
   DesktopNavigationItems,
@@ -38,11 +39,12 @@ export function DesktopNavigation() {
           className={cn(
             buttonVariants({
               size: "sm",
-              className: "h-9 px-5 text-[13px] font-semibold shadow-sm",
+              className: "h-9 gap-1.5 px-5 text-[13px] font-semibold shadow-sm",
             }),
           )}
         >
           {navigationAction.label}
+          <ArrowRight aria-hidden="true" />
         </Link>
       </div>
     </>

@@ -18,13 +18,13 @@ const playfairDisplay = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://huzali.academy"),
-  applicationName: "Huzali Academy",
+  applicationName: "Huzali Beauty Academy",
   title: {
-    default: "Huzali Academy",
-    template: "%s | Huzali Academy",
+    default: "Huzali Beauty Academy",
+    template: "%s | Huzali Beauty Academy",
   },
   description:
-    "Huzali Academy is a vocational beauty academy offering professional beauty courses through scheduled intakes. Learn. Create. Earn.",
+    "Huzali Beauty Academy empowers girls and young women through practical beauty education, building skills, confidence and pathways to sustainable livelihoods.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

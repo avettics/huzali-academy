@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, XIcon } from "lucide-react";
+import { ArrowRight, Menu, XIcon } from "lucide-react";
 
 import { MobileNavigationLinks } from "@/components/layout/navigation-links";
 import { navigationAction } from "@/components/layout/navigation";
@@ -81,12 +81,11 @@ export function MobileNavigation() {
                 href={navigationAction.href}
                 onNavigate={close}
                 className={cn(
-                  buttonVariants({
-                    className: `w-full font-semibold ${touchTargetClassName}`,
-                  }),
+                  buttonVariants({ size: "cta", className: "w-full" }),
                 )}
               >
                 {navigationAction.label}
+                <ArrowRight aria-hidden="true" />
               </Link>
             </div>
           </nav>

@@ -1,3 +1,4 @@
+import { SharedSupportApplyCta } from "@/components/layout/shared-support-apply-cta";
 import { Footer } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 
@@ -16,6 +17,9 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
       <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
         {children}
       </main>
+
+      {/* Shared closing invitation on every public page, above the footer. */}
+      <SharedSupportApplyCta />
 
       <Footer />
     </>

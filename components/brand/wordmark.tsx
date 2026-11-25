@@ -9,7 +9,7 @@ type WordmarkProps = Omit<ComponentProps<typeof Link>, "href" | "children">;
  * The established Huzali wordmark (Playfair Display "Huzali"), linking home.
  * Used until a real logo asset exists. Always Huzali charcoal (a brand
  * primitive), independent of the semantic foreground. Used by the header at
- * 25px; the footer uses its own smaller "Huzali.academy" signature.
+ * 25px; the footer uses its own smaller "Huzali" signature.
  */
 export function Wordmark({ className, ...props }: WordmarkProps) {
   return (

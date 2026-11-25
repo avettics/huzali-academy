@@ -44,6 +44,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-surface-alt: var(--surface-alt);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -91,6 +92,12 @@
   --card-foreground: oklch(0.282 0.087 267.935);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.282 0.087 267.935);
+
+  /*
+   * Alternate section surface: a very soft lilac-neutral used for every other
+   * homepage section (full width), to separate sections without dividers.
+   */
+  --surface-alt: #f3f0f7;
 
   /*
    * Primary = Huzali purple. White text: 4.83:1 (base), 6.49:1 (hover),
@@ -195,6 +202,8 @@
   --card-foreground: oklch(0.98 0 0);
   --popover: oklch(0.18 0.03 268);
   --popover-foreground: oklch(0.98 0 0);
+
+  --surface-alt: oklch(0.17 0.03 268);
 
   /*
    * Huzali purple, unchanged on dark surfaces: white text stays 4.83:1 and

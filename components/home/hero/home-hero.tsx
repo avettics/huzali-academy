@@ -66,8 +66,8 @@ export function HomeHero() {
               id="home-hero-title"
               className="font-heading text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl xl:text-[3.375rem]"
             >
-              Beauty skills that create{" "}
-              <span className="text-primary italic">opportunity.</span>
+              Beauty skills.{" "}
+              <span className="text-primary italic">Brighter futures.</span>
             </h1>
           </Reveal>
 
@@ -76,8 +76,9 @@ export function HomeHero() {
             delay={1}
             className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Practical beauty training for young women, building skills,
-            confidence and pathways to sustainable livelihoods.
+            Empowering girls and young women with practical beauty skills,
+            confidence and opportunities to build independent, sustainable
+            livelihoods.
           </Reveal>
 
           <Reveal
@@ -87,10 +88,7 @@ export function HomeHero() {
             <Link
               href="/apply"
               className={cn(
-                buttonVariants({
-                  size: "lg",
-                  className: "h-11 w-full px-6 font-semibold sm:w-auto",
-                }),
+                buttonVariants({ size: "cta", className: "w-full sm:w-auto" }),
               )}
             >
               Apply Now
@@ -102,8 +100,8 @@ export function HomeHero() {
               className={cn(
                 buttonVariants({
                   variant: "outline",
-                  size: "lg",
-                  className: "h-11 w-full px-6 font-semibold sm:w-auto",
+                  size: "cta",
+                  className: "w-full sm:w-auto",
                 }),
               )}
             >

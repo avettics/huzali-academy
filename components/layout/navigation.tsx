@@ -10,11 +10,11 @@ export type NavigationGroup = {
 
 /*
  * Single source of truth for Huzali Academy's public destinations. Only "/"
- * is implemented today; the others are planned pages. Home has no navigation
- * item: the Huzali wordmark is the route back to "/".
+ * and "/courses" are implemented today; the others are planned pages. Home
+ * has no navigation item: the Huzali wordmark is the route back to "/".
  */
 const routes = {
-  academy: { label: "Academy", href: "/academy" },
+  academy: { label: "The Academy", href: "/academy" },
   courses: { label: "Courses", href: "/courses" },
   admissions: { label: "Admissions", href: "/admissions" },
   studentLife: { label: "Student Life", href: "/student-life" },
