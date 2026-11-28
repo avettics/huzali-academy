@@ -46,10 +46,18 @@ export function HomePartners() {
           <Reveal
             as="ul"
             delay={1}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:mt-10 lg:gap-x-16"
+            className="mt-8 flex flex-wrap items-center justify-center gap-y-8 sm:mt-10"
           >
+            {/*
+             * Fixed columns, each logo centred in its cell: 2 per row on
+             * phones, 3 from `md`, 6 from `lg`. Flex (not grid) keeps an
+             * incomplete last row centred whatever the partner count.
+             */}
             {displayedPartners.map((partner) => (
-              <li key={partner.name}>
+              <li
+                key={partner.name}
+                className="flex basis-1/2 justify-center px-3 md:basis-1/3 lg:basis-1/6"
+              >
                 <PartnerLogo partner={partner} />
               </li>
             ))}
@@ -71,7 +79,7 @@ function PartnerLogo({ partner }: { partner: Partner }) {
       height={logo.height}
       alt={alt}
       sizes="160px"
-      className="h-8 w-auto opacity-70 grayscale sm:h-9 lg:h-10"
+      className="h-8 w-auto max-w-full object-contain opacity-70 grayscale sm:h-9 lg:h-10"
     />
   );
 
