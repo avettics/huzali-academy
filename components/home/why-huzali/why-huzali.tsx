@@ -9,18 +9,35 @@ import { imageZoom, imageZoomGroup } from "@/components/motion/image-zoom";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import groupTrainingSession from "@/public/academy/huzali-academy-group-training-table.jpeg";
 import heroPhoto from "@/public/hero/hero.jpg";
 
 /*
- * TEMPORARY PHOTOGRAPH: no dedicated Why Huzali photograph exists yet, so
- * this reuses the untouched hero master. Replace `photo` (src, alt and crop
- * position together) when an authentic Why Huzali photograph is supplied.
+ * PHOTOGRAPH APPROVAL. The preferred Why Huzali photograph is a group
+ * training session: an instructor works with a student while others follow
+ * around a shared table of makeup kits (`public/academy/huzali-academy-group-training-table.jpeg`).
+ * Its publication permission is not yet confirmed, so until this is set to
+ * `true` it is shown only in development (`next dev`); production keeps the
+ * already published hero training photograph.
  */
-const photo = {
+const groupTrainingPhotoApproved = false;
+
+const groupTrainingPhoto = {
+  src: groupTrainingSession,
+  alt: "A Huzali Academy instructor demonstrates makeup on a seated student while other participants watch around a table of makeup kits.",
+  position: "object-[50%_15%]",
+};
+
+const publishedPhoto = {
   src: heroPhoto,
   alt: "A Huzali Academy instructor applies lipstick to a seated student during practical training.",
   position: "object-[50%_30%]",
 };
+
+const photo =
+  groupTrainingPhotoApproved || process.env.NODE_ENV === "development"
+    ? groupTrainingPhoto
+    : publishedPhoto;
 
 type ProgressionStep = {
   step: string;

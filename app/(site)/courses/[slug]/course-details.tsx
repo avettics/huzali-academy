@@ -5,9 +5,12 @@ import {
   CourseGrid,
   courseGridClassName,
 } from "@/components/courses/course-grid";
+import {
+  PageHeader,
+  type PageHeaderArtwork,
+} from "@/components/layout/page-header";
 import { ImageReveal } from "@/components/motion/image-reveal";
 import { imageZoom, imageZoomGroup } from "@/components/motion/image-zoom";
-import { Reveal } from "@/components/motion/reveal";
 import { courses, getCourse } from "@/lib/courses";
 import { cn } from "@/lib/utils";
 
@@ -19,64 +22,64 @@ import { cn } from "@/lib/utils";
 
 type CourseParams = Pick<PageProps<"/courses/[slug]">, "params">;
 
-const introGrid =
-  "mt-8 grid gap-y-10 lg:mt-10 lg:grid-cols-2 lg:items-center lg:gap-x-16";
+/* Wide, height-capped frame for the course photograph below the header. */
+const photoFrame =
+  "relative aspect-4/3 w-full rounded-xl sm:aspect-video lg:aspect-16/7 lg:max-h-128";
 
-export async function CourseIntro({ params }: CourseParams) {
+/*
+ * Beauty line-art per course, keyed by canonical slug. A course without an
+ * entry (e.g. one added later) falls back to the mixed "beauty" set.
+ */
+const courseArtwork: Record<string, PageHeaderArtwork> = {
+  "makeup-artistry": "makeup",
+  "hair-styling": "hair",
+  "nail-technology": "nails",
+  "lash-artistry": "lashes",
+  skincare: "skincare",
+  "massage-therapy": "massage",
+};
+
+/* The shared Page Header, filled from the course's canonical data. */
+export async function CourseHeader({ params }: CourseParams) {
   const { slug } = await params;
   const course = getCourse(slug);
   if (!course) notFound();
 
   return (
-    <div className={introGrid}>
-      <Reveal>
-        <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-          Course
-        </p>
-        <h1
-          id="course-title"
-          className="mt-4 font-heading text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl"
-        >
-          {course.title}
-        </h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg">
-          {course.summary}
-        </p>
-      </Reveal>
-
-      {course.image ? (
-        <ImageReveal
-          className={cn(imageZoomGroup, "relative aspect-4/3 rounded-xl")}
-        >
-          <div className="absolute inset-0">
-            <Image
-              src={course.image.src}
-              alt={course.image.alt}
-              fill
-              loading="eager"
-              fetchPriority="high"
-              sizes="(min-width: 1440px) 648px, (min-width: 1024px) 46vw, 100vw"
-              className={cn("object-cover", course.image.position, imageZoom)}
-            />
-          </div>
-        </ImageReveal>
-      ) : null}
-    </div>
+    <PageHeader
+      eyebrow="Our Courses"
+      title={course.title}
+      description={course.summary}
+      artwork={courseArtwork[course.slug] ?? "beauty"}
+    />
   );
 }
 
-/* Placeholder with the same structure while the course content streams in. */
-export function CourseIntroFallback() {
+export async function CoursePhoto({ params }: CourseParams) {
+  const { slug } = await params;
+  const image = getCourse(slug)?.image;
+  if (!image) return null;
+
   return (
-    <div className={introGrid} aria-hidden="true">
-      <div>
-        <div className="h-3 w-16 rounded-full bg-primary/10" />
-        <div className="mt-5 h-11 w-3/4 rounded-lg bg-primary/8" />
-        <div className="mt-6 h-4 w-full max-w-2xl rounded-full bg-primary/6" />
-        <div className="mt-3 h-4 w-5/6 max-w-md rounded-full bg-primary/6" />
+    <ImageReveal className={cn(imageZoomGroup, "mt-6", photoFrame)}>
+      <div className="absolute inset-0">
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          loading="eager"
+          fetchPriority="high"
+          sizes="(min-width: 1440px) 1360px, 100vw"
+          className={cn("object-cover", image.position, imageZoom)}
+        />
       </div>
-      <div className="aspect-4/3 rounded-xl bg-primary/8" />
-    </div>
+    </ImageReveal>
+  );
+}
+
+export function CoursePhotoFallback() {
+  return (
+    <div className={cn("mt-6 bg-primary/8", photoFrame)} aria-hidden="true" />
   );
 }
 

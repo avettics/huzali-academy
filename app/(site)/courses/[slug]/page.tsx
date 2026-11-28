@@ -7,17 +7,21 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { courses, coursesIndexHref, getCourse } from "@/lib/courses";
 
+import { PageHeaderFallback } from "@/components/layout/page-header";
+
 import {
-  CourseIntro,
-  CourseIntroFallback,
+  CourseHeader,
+  CoursePhoto,
+  CoursePhotoFallback,
   MoreCourses,
   MoreCoursesFallback,
 } from "./course-details";
 
 /*
- * Course page template. Shows only approved information (title, the
- * course's own summary, the photograph) until further course details are
- * confirmed; then more courses to continue browsing.
+ * Course page template: the shared Page Header (title and the course's own
+ * summary), then the back link and course photograph, then more courses.
+ * Shows only approved information until further course details are
+ * confirmed.
  *
  * The page itself never reads `params`: it renders the URL-independent shell
  * (sections, back link, "More courses" heading) and the URL-specific parts
@@ -43,18 +47,22 @@ export async function generateMetadata({
 export default function CoursePage({ params }: PageProps<"/courses/[slug]">) {
   return (
     <>
-      <Section spacing="compact" aria-labelledby="course-title">
+      <Suspense fallback={<PageHeaderFallback />}>
+        <CourseHeader params={params} />
+      </Suspense>
+
+      <Section spacing="compact">
         <Container>
           <Link
             href={coursesIndexHref}
-            className="inline-flex items-center gap-2 rounded-(--radius-control) text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-(--radius-control) text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             All courses
           </Link>
 
-          <Suspense fallback={<CourseIntroFallback />}>
-            <CourseIntro params={params} />
+          <Suspense fallback={<CoursePhotoFallback />}>
+            <CoursePhoto params={params} />
           </Suspense>
         </Container>
       </Section>

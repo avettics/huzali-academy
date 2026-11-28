@@ -83,12 +83,12 @@ export function Footer() {
                     </Link>
                   ) : (
                     /*
-                     * Destination awaiting owner confirmation: same
-                     * presentation, but plain text (not a link, not focusable).
+                     * Destination awaiting owner confirmation: plain text
+                     * (not a link, not focusable) and no external arrow,
+                     * which is reserved for real external links.
                      */
-                    <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground">
-                      <span>{item.label}</span>
-                      <ExternalArrow />
+                    <span className="text-[13px] font-medium text-muted-foreground">
+                      {item.label}
                     </span>
                   )}
                 </li>

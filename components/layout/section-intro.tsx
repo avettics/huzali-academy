@@ -4,8 +4,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 type SectionIntroProps = {
-  /** Small uppercase label above the heading. */
-  eyebrow: string;
+  /** Small uppercase label above the heading. Omit for none. */
+  eyebrow?: string;
   /** Section heading (the section's h2, or the page's h1). */
   title: ReactNode;
   /** `id` for the heading, so the section can use `aria-labelledby`. */
@@ -48,12 +48,14 @@ export function SectionIntro({
       )}
     >
       <Reveal>
-        <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-          {eyebrow}
-        </p>
+        {eyebrow ? (
+          <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-primary uppercase">
+            {eyebrow}
+          </p>
+        ) : null}
         <Heading
           id={titleId}
-          className="mt-4 font-heading text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]"
+          className="font-heading text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]"
         >
           {title}
         </Heading>
