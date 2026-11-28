@@ -11,19 +11,18 @@
  */
 
 /**
- * True only under `next dev`: held content and review-only placeholders
- * (such as the partner logo placeholders) preview there. The only
+ * True only under `next dev`: held content previews there. The only
  * `NODE_ENV` check for content in the application.
  */
 export const developmentPreview = process.env.NODE_ENV === "development";
 
 /*
- * HELD. Our Story contains the founders' personal accounts as survivors of
- * gender-based violence. It must not go live until Husna Zaid and Eunice
- * Kakuvi Muthama have explicitly approved the narrative. Its photographs
- * are approved (owner confirmation, 2026-11-28); the text is not.
+ * PUBLISHED. Our Story contains the founders' personal accounts as
+ * survivors of gender-based violence. Husna Zaid and Eunice Kakuvi Muthama
+ * have approved the narrative and its photographs for publication (owner
+ * confirmation, 2026-11-28).
  */
-export const storyApprovedForPublication = false;
+export const storyApprovedForPublication = true;
 
 /*
  * PUBLISHED. Our Team, with its holding line until confirmed team profiles

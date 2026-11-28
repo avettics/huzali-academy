@@ -152,8 +152,7 @@ const paragraphsClassName =
  * founders; portrait in 5 of 12 columns), then two chapters with one
  * top-aligned landscape photograph each (the Huzali team; practical
  * training) on a 50/50 grid, with a quiet rule between chapters. Rendered
- * only once publication is approved (see `storyApprovedForPublication`),
- * or in development for review.
+ * while `storyApprovedForPublication` is `true` (or in development).
  */
 export function OurStory() {
   if (!storyPublished) {

@@ -6,9 +6,9 @@ import { PageHeader } from "@/components/layout/page-header";
 import { storyPublished } from "@/lib/publication";
 
 /*
- * Our Story: the founding story, on its own page. PUBLICATION HOLD: until
- * `storyApprovedForPublication` (lib/publication.ts) is `true`, this route
- * renders only in development and returns 404 in production.
+ * Our Story: the founding story, on its own page. Published under
+ * `storyApprovedForPublication` (lib/publication.ts); setting it to `false`
+ * returns this route to 404 in production.
  */
 
 const description =

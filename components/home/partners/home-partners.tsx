@@ -15,9 +15,9 @@ import {
  * Our Partners: a quiet credibility strip on a light neutral surface. One
  * restrained centred line (the section heading, in Manrope), a link to the
  * partnerships page, then one row of muted partner logos at a shared height
- * (wrapping into balanced rows on smaller screens). Without confirmed
- * partners, the logo row is not rendered at all (development shows
- * temporary placeholders; see lib/partners.ts).
+ * (wrapping into balanced rows on smaller screens). Until partners are
+ * confirmed, the row shows temporary placeholder logos (see
+ * lib/partners.ts).
  */
 export function HomePartners() {
   return (
