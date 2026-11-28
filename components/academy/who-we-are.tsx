@@ -12,33 +12,13 @@ import { Reveal } from "@/components/motion/reveal";
 import { coursesIndexHref } from "@/lib/courses";
 import { cn } from "@/lib/utils";
 import trainingSessionPhoto from "@/public/academy/huzali-academy-eyeliner-application-lesson.jpeg";
-import heroPhoto from "@/public/hero/hero.jpg";
 
-/*
- * PHOTOGRAPH APPROVAL. The preferred Who We Are photograph is a practical
- * training session (`public/academy/huzali-academy-eyeliner-application-lesson.jpeg`). Its publication
- * permission is not yet confirmed, so until this is set to `true` it is
- * shown only in development (`next dev`); production keeps the already
- * published hero training photograph.
- */
-const trainingPhotoApproved = false;
-
-const trainingPhoto = {
+/* A practical training session (approved, 2026-11-28). */
+const photo = {
   src: trainingSessionPhoto,
   alt: "A Huzali Academy instructor applies eyeliner to a seated student while another student watches during practical training.",
   position: "object-[60%_40%]",
 };
-
-const publishedPhoto = {
-  src: heroPhoto,
-  alt: "A Huzali Academy instructor applies lipstick to a seated student during practical training.",
-  position: "object-[55%_35%]",
-};
-
-const photo =
-  trainingPhotoApproved || process.env.NODE_ENV === "development"
-    ? trainingPhoto
-    : publishedPhoto;
 
 type Statement = {
   title: string;

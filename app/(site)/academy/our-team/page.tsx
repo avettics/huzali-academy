@@ -8,9 +8,8 @@ import { teamPublished } from "@/lib/publication";
 /*
  * Our Team: page foundation for Huzali Beauty Academy personnel only
  * (leadership, trainers and instructors, administration and support).
- * No verified team details exist yet, so until `teamApprovedForPublication`
- * (lib/publication.ts) is `true` this route renders only in development and
- * returns 404 in production.
+ * Published (`teamApprovedForPublication` in lib/publication.ts) with a
+ * holding line until confirmed team profiles are available.
  */
 
 const description =

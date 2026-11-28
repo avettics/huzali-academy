@@ -36,8 +36,8 @@ const halfSizes = "(min-width: 1440px) 672px, (min-width: 768px) 50vw, 50vw";
 const quarterSizes = "(min-width: 1440px) 332px, (min-width: 768px) 25vw, 50vw";
 
 /*
- * PUBLICATION HOLD: see `learningPhotosApprovedForPublication` in
- * lib/publication.ts. None of these photographs is approved yet.
+ * Published: see `learningPhotosApprovedForPublication` in
+ * lib/publication.ts. All of these photographs are approved.
  *
  * In display order. From `md`, on a 24-column grid, three rows:
  *   1. The leading student group photograph (5/12 wide, spanning two grid

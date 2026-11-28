@@ -1,3 +1,5 @@
+import { developmentPreview } from "@/lib/publication";
+
 /*
  * Huzali Beauty Academy's partners. Local content until a CMS source
  * replaces it; components consume the `Partner` shape only.
@@ -51,6 +53,6 @@ const placeholderPartners: Partner[] = Array.from({ length: 6 }, (_, index) => (
 export const displayedPartners: Partner[] =
   partners.length > 0
     ? partners
-    : process.env.NODE_ENV === "development"
+    : developmentPreview
       ? placeholderPartners
       : [];
